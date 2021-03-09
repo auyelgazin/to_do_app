@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 class TaskTile extends StatelessWidget {
   final bool isChecked;
   final String task;
-  final Function toggle;
+  final Function checkboxCallback;
+  final Function deleteTask;
 
-  TaskTile(this.task, this.isChecked, this.toggle);
+  TaskTile(this.task, this.isChecked, this.checkboxCallback, this.deleteTask);
 
   // void checkboxCallback(bool checkboxState) {
-  //   setState(() {
-  //     isChecked = checkboxState;
-  //   });
+  //   isChecked = checkboxState;
   // }
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onLongPress: deleteTask,
       title: Text(
         task,
         style: TextStyle(
@@ -24,7 +24,7 @@ class TaskTile extends StatelessWidget {
       ),
       trailing: Checkbox(
         value: isChecked,
-        onChanged: toggle,
+        onChanged: checkboxCallback,
       ),
     );
   }
